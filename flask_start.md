@@ -111,3 +111,8 @@
             
             if __name__ == "__main__":
                 app.run(host="127.0.0.1", port="1234")
+
+
+### 결과
+
+![flask](https://user-images.githubusercontent.com/76901290/125394890-58b1df00-e3e5-11eb-88f0-52de5aa20fd4.PNG)
