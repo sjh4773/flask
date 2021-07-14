@@ -64,118 +64,118 @@
   
 
 
-      # 다른 변수에 함수 할당 가능
-      input:    
-      def calc_square(digit):
-          return digit * digit
-      
-      # func1이라는 변수에 함수를 할당 가능
-      # func1이라는 변수는 calc_square 함수를 가리키고, calc_square와 마찬가지로 인자도 넣어서 결과도 얻을 수 있음(완전 calc_square과 동일)
-      func1 = calc_square
-      
-      print(func1)
-      func1(2)
-      
-      output:
-      <function calc_square at 0x0000016E07B4CE50>
-      4
-
-
-      # 함수를 다른 함수의 인자로 넣을 수도 있음
-      input:
-      def calc_square(digit):
-          return digit * digit
-      
-      def calc_plus(digit):
-          return digit + digit
-      
-      def calc_quad(digit):
-          return digit * digit * digit * digit
-
-      def list_square(function, digit_list):
-          result = list()
-          for digit in digit_list:
-              result.append(function(digit))
-          print(result)
-
-      num_list = [1, 2, 3, 4, 5]
-
-      list_square(calc_square, num_list)
-      list_square(calc_plus, num_list)
-      list_square(calc_quad, num_list)
-    
-      output:
-      [1, 4, 9, 16, 25]
-      [2, 4, 6, 8, 10]
-      [1, 16, 81, 256, 625]
-
-      
-      # 함수의 결과값으로 함수를 리턴할 수도 있음
-      input:
-      def logger(msg):
-          message = msg
-          def msg_creator(): # <-- 함수 안에 함수를 만들 수도 있음
-              print('[HIGH LEVEL]:', message)
-          return msg_creator
-
-      log1 = logger('Hun Log-in')
-
-      log1()
+        # 다른 변수에 함수 할당 가능
+        input:    
+        def calc_square(digit):
+            return digit * digit
         
-      output:
-      [HIGH LEVEL]: Hun Log-in
-
-      # logger 함수를 삭제해도 log1() 함수는 logger 함수 안에 있는 msg_creator 함수와 msg 값을 유지
-      input:
-      del logger
-
-      log1()
+        # func1이라는 변수에 함수를 할당 가능
+        # func1이라는 변수는 calc_square 함수를 가리키고, calc_square와 마찬가지로 인자도 넣어서 결과도 얻을 수 있음(완전 calc_square과 동일)
+        func1 = calc_square
+        
+        print(func1)
+        func1(2)
+        
+        output:
+        <function calc_square at 0x0000016E07B4CE50>
+        4
+  
+  
+        # 함수를 다른 함수의 인자로 넣을 수도 있음
+        input:
+        def calc_square(digit):
+            return digit * digit
+        
+        def calc_plus(digit):
+            return digit + digit
+        
+        def calc_quad(digit):
+            return digit * digit * digit * digit
+  
+        def list_square(function, digit_list):
+            result = list()
+            for digit in digit_list:
+                result.append(function(digit))
+            print(result)
+  
+        num_list = [1, 2, 3, 4, 5]
+  
+        list_square(calc_square, num_list)
+        list_square(calc_plus, num_list)
+        list_square(calc_quad, num_list)
       
-      output:
-      [HIGH LEVEL]: Hun Log-in
-
-      
-      # First-class 함수 활용
-      input:
-      def html_creator(tag):
-          def text_wrapper(msg):
-              print('<{0}>{1}</{0}>'.format(tag, msg))
-          return text_wrapper
-
-      h1_html_creator = html_creator('h1')
-
-      h1_html_creator('H1 태그는 타이틀을 표시하는 태그입니다.')
-
-      output:
-      <h1>H1 태그는 타이틀을 표시하는 태그입니다.</h1>
-
-      input:
-      p_html_creator = html_creator('p')
-      p_html_creator('P 태그는 문단을 표시하는 태그입니다.')
-
-      output:
-      <p>P 태그는 문단을 표시하는 태그입니다.</p>
-
-      input:
-      def index_creator(index):
-          def table_of_contents(content_list):
-              for content in content_list:
-                  print('{0} {1}'.format(index, content))
-          return table_of_contents
-
-      data_list_minus = index_creator('-')
-      data_list_minus(['등운동', '가슴운동','다리운동'])
-      
-      data_list_mul = index_creator('*')
-      data_list_mul(['팔운동', '어깨운동', '전완근 운동'])
-
-      output:
-      - 등운동
-      - 가슴운동
-      - 다리운동
-      * 팔운동
-      * 어깨운동
-      * 전완근 운동
+        output:
+        [1, 4, 9, 16, 25]
+        [2, 4, 6, 8, 10]
+        [1, 16, 81, 256, 625]
+  
+        
+        # 함수의 결과값으로 함수를 리턴할 수도 있음
+        input:
+        def logger(msg):
+            message = msg
+            def msg_creator(): # <-- 함수 안에 함수를 만들 수도 있음
+                print('[HIGH LEVEL]:', message)
+            return msg_creator
+  
+        log1 = logger('Hun Log-in')
+  
+        log1()
+          
+        output:
+        [HIGH LEVEL]: Hun Log-in
+  
+        # logger 함수를 삭제해도 log1() 함수는 logger 함수 안에 있는 msg_creator 함수와 msg 값을 유지
+        input:
+        del logger
+  
+        log1()
+        
+        output:
+        [HIGH LEVEL]: Hun Log-in
+  
+        
+        # First-class 함수 활용
+        input:
+        def html_creator(tag):
+            def text_wrapper(msg):
+                print('<{0}>{1}</{0}>'.format(tag, msg))
+            return text_wrapper
+  
+        h1_html_creator = html_creator('h1')
+  
+        h1_html_creator('H1 태그는 타이틀을 표시하는 태그입니다.')
+  
+        output:
+        <h1>H1 태그는 타이틀을 표시하는 태그입니다.</h1>
+  
+        input:
+        p_html_creator = html_creator('p')
+        p_html_creator('P 태그는 문단을 표시하는 태그입니다.')
+  
+        output:
+        <p>P 태그는 문단을 표시하는 태그입니다.</p>
+  
+        input:
+        def index_creator(index):
+            def table_of_contents(content_list):
+                for content in content_list:
+                    print('{0} {1}'.format(index, content))
+            return table_of_contents
+  
+        data_list_minus = index_creator('-')
+        data_list_minus(['등운동', '가슴운동','다리운동'])
+        
+        data_list_mul = index_creator('*')
+        data_list_mul(['팔운동', '어깨운동', '전완근 운동'])
+  
+        output:
+        - 등운동
+        - 가슴운동
+        - 다리운동
+        * 팔운동
+        * 어깨운동
+        * 전완근 운동
 
 ## closure function
 - 함수와 해당 함수가 가지고 있는 데이터를 함께 복사, 저장해서 별도 함수로 활용하는 기법으로 First-class 함수와 동일
